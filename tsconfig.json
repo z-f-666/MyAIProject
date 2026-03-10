@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2018", // 升级目标版本，适配现代浏览器/Node.js
+    "lib": ["dom", "dom.iterable", "ES2020"], // 扩展ES库版本，支持更多新特性
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true, // 保持严格模式（推荐）
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve", // Next.js 推荐 preserve（由Next.js自身处理JSX编译）
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./*"] // 路径别名，适配项目根目录导入
+    },
+    "forceConsistentCasingInFileNames": true, // 新增：强制文件名大小写一致，避免跨平台问题
+    "noUncheckedIndexedAccess": true, // 新增：提升类型安全性，避免索引访问未定义值
+    "baseUrl": "." // 新增：配合paths，明确基础路径
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/**/*" // 新增：如果项目有src目录，纳入编译范围
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts", // 新增：排除测试文件
+    "dist", // 新增：排除构建产物目录
+    ".next/static" // 新增：排除Next.js静态生成目录（避免重复编译）
+  ]
+}
