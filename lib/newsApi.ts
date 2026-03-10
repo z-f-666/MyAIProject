@@ -2,7 +2,7 @@
  * lib/newsApi.ts - GNews API 适配版
  */
 
-const API_KEY = process.env.NEWS_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const USE_REAL_API = process.env.NEXT_PUBLIC_USE_REAL_API === 'true';
 
 // 备用模拟数据：当 API 挂了或额度用完时，保证网页不白屏
@@ -84,4 +84,5 @@ export async function searchNews(query: string, page = 1) {
     }
   }
   return mockNewsData;
+
 }
