@@ -1,6 +1,7 @@
 /**
  * lib/newsApi.ts - GNews API 适配版
  */
+'use server'
 
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const USE_REAL_API = process.env.NEXT_PUBLIC_USE_REAL_API === 'true';
@@ -86,3 +87,4 @@ export async function searchNews(query: string, page = 1) {
   return mockNewsData;
 
 }
+
