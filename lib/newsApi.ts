@@ -1,6 +1,3 @@
-/**
- * lib/newsApi.ts - GNews API 适配版
- */
 'use server'
 
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
@@ -35,15 +32,14 @@ const mockNewsData = {
 export async function getNews(category = 'general', country = 'us', page = 1) {
   if (USE_REAL_API && API_KEY) {
     try {
-      // GNews 免费版参数：lang=en (语言), country=国家代码, max=10 (返回数量)
-      // 注意：GNews 免费版的分页参数较弱，我们主要获取前 10 条
-      const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=${country}&max=10&apikey=${API_KEY}`;
+      // 🌍 已经去掉了 &lang=en，这样就能原汁原味获取各个国家本土语言的新闻啦！
+      const url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=10&apikey=${API_KEY}`;
       
       const response = await fetch(url, { next: { revalidate: 3600 } });
       const data = await response.json();
 
       if (response.ok && data.articles) {
-        // 【关键】翻译官：把 GNews 的 image 变成组件认识的 urlToImage
+        // 翻译官：把 GNews 的 image 变成组件认识的 urlToImage
         const formattedArticles = data.articles.map((article: any, index: number) => ({
           ...article,
           urlToImage: article.image || 'https://via.placeholder.com/500x300?text=No+Image',
@@ -65,7 +61,8 @@ export async function getNews(category = 'general', country = 'us', page = 1) {
 export async function searchNews(query: string, page = 1) {
   if (USE_REAL_API && API_KEY) {
     try {
-      const url = `https://gnews.io/api/v4/search?q=${query}&lang=en&max=10&apikey=${API_KEY}`;
+      // 🌍 同样去掉了 &lang=en
+      const url = `https://gnews.io/api/v4/search?q=${query}&max=10&apikey=${API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
 
@@ -85,6 +82,4 @@ export async function searchNews(query: string, page = 1) {
     }
   }
   return mockNewsData;
-
 }
-
