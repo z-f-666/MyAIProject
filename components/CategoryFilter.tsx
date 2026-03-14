@@ -22,11 +22,14 @@ export default function CategoryFilter() {
         <button
           key={cat.id}
           onClick={() => setCategory(cat.id)}
-          className={`category-badge px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+          className={`category-badge px-4 py-2 rounded-full text-sm font-medium transition-all ${
             category === cat.id
-              ? 'bg-primary text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              // 选中时：背景变为动态主题色，文字强制变白确保能看清
+              ? 'bg-theme-primary text-white shadow-md'
+              // 未选中时：背景变为当前颜色的 10% 透明度，文字 80% 透明度
+              : 'opacity-80 hover:opacity-100'
           }`}
+          style={category !== cat.id ? { backgroundColor: 'color-mix(in srgb, currentColor 10%, transparent)' } : {}}
           title={cat.description}
         >
           {cat.name}
