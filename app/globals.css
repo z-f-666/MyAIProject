@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 :root {
+  /* 原来的默认基础变量 */
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  /* 👇 咱们的专属动态调色变量（默认设为白底、黑字、蓝按钮） */
+  --dynamic-bg: #ffffff;
+  --dynamic-text: #000000;
+  --dynamic-primary: #3b82f6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,19 +19,22 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    
+    /* 深色模式下的默认动态颜色 */
+    --dynamic-bg: #121212;
+    --dynamic-text: #ffffff;
+    --dynamic-primary: #3b82f6;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* 强行让整个网页听从调色盘的指挥，并加上 0.3 秒的丝滑变色动画！ */
+  background-color: var(--dynamic-bg);
+  color: var(--dynamic-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 👇 下面完美保留了你原来写的卡片悬浮特效，一字没动！ */
 .news-card {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
