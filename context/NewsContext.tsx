@@ -1,6 +1,3 @@
-/**
- * context/NewsContext.tsx - 完整适配版
- */
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
@@ -45,7 +42,14 @@ export function NewsProvider({ children }: { children: ReactNode }) {
         if (pageNum === 1) {
           setArticles(response.articles)
         } else {
-          setArticles(prev => [...prev, ...response.articles])
+          // 👉 增加去重逻辑：过滤掉 URL 已经存在的新闻
+          setArticles(prev => {
+            const existingUrls = new Set(prev.map(article => article.url));
+            const uniqueNewArticles = response.articles.filter(
+              (article: NewsArticle) => !existingUrls.has(article.url)
+            );
+            return [...prev, ...uniqueNewArticles];
+          });
         }
         setPage(pageNum)
         // GNews 免费版一次给 10 条，如果拿到了 10 条说明可能还有
@@ -77,7 +81,14 @@ export function NewsProvider({ children }: { children: ReactNode }) {
          if (pageNum === 1) {
            setArticles(response.articles)
          } else {
-           setArticles(prev => [...prev, ...response.articles])
+           // 👉 增加去重逻辑：过滤掉 URL 已经存在的新闻
+           setArticles(prev => {
+             const existingUrls = new Set(prev.map(article => article.url));
+             const uniqueNewArticles = response.articles.filter(
+               (article: NewsArticle) => !existingUrls.has(article.url)
+             );
+             return [...prev, ...uniqueNewArticles];
+           });
          }
          setPage(pageNum)
          setHasMore(response.articles.length >= 10)
