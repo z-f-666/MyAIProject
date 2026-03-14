@@ -1,4 +1,4 @@
-'use client'; // 重点：加上这行，告诉 Next.js 这是一个客户端组件
+'use client'; 
 
 import { useState } from 'react'
 import Image from 'next/image'
@@ -13,7 +13,6 @@ interface NewsCardProps {
 }
 
 export default function NewsCard({ article }: NewsCardProps) {
-  // 设置一个状态来记录当前图片的 src
   const [imgSrc, setImgSrc] = useState(article.urlToImage || 'https://via.placeholder.com/500x300');
 
   const publishedTime = formatDistanceToNow(new Date(article.publishedAt), {
@@ -22,16 +21,15 @@ export default function NewsCard({ article }: NewsCardProps) {
   })
 
   return (
-    <div className="news-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="news-card rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-current border-opacity-10">
       <div className="relative h-48">
         <Image
-          src={imgSrc} // 使用状态里的图片地址
+          src={imgSrc} 
           alt={article.title}
           fill
           unoptimized
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          // 如果图片加载失败，自动替换成占位图！
           onError={() => {
             setImgSrc('https://via.placeholder.com/500x300');
           }}
@@ -39,7 +37,7 @@ export default function NewsCard({ article }: NewsCardProps) {
       </div>
       
       <div className="p-4">
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+        <div className="flex items-center gap-2 text-sm opacity-60 mb-2">
           <span className="font-medium">{article.source.name}</span>
           <span>•</span>
           <div className="flex items-center gap-1">
@@ -48,19 +46,19 @@ export default function NewsCard({ article }: NewsCardProps) {
           </div>
         </div>
         
-        <h3 className="font-bold text-lg mb-2 line-clamp-2 hover:text-primary transition-colors">
+        <h3 className="font-bold text-lg mb-2 line-clamp-2 hover:text-theme-primary transition-colors">
           <Link href={article.url} target="_blank" rel="noopener noreferrer">
             {article.title}
           </Link>
         </h3>
         
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+        <p className="text-sm mb-4 line-clamp-3 opacity-80">
           {article.description}
         </p>
         
         <div className="flex items-center justify-between">
           {article.author && (
-            <div className="flex items-center gap-1 text-sm text-gray-500">
+            <div className="flex items-center gap-1 text-sm opacity-60">
               <User className="h-3 w-3" />
               <span className="truncate max-w-[120px]">{article.author}</span>
             </div>
@@ -70,7 +68,7 @@ export default function NewsCard({ article }: NewsCardProps) {
             href={article.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm text-primary hover:underline"
+            className="flex items-center gap-1 text-sm text-theme-primary hover:opacity-70 transition-opacity"
           >
             阅读更多
             <ExternalLink className="h-3 w-3" />
