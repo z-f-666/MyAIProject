@@ -83,4 +83,3 @@ export async function searchNews(query: string, page = 1) {
   }
   return mockNewsData;
 }
-
