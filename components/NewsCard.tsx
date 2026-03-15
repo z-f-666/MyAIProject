@@ -52,8 +52,8 @@ export default function NewsCard({ article }: NewsCardProps) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -8; // 上下最大倾斜 8 度
-    const rotateY = ((x - centerX) / centerX) * 8;  // 左右最大倾斜 8 度
+    const rotateX = ((y - centerY) / centerY) * -10; // 上下最大倾斜 10 度
+    const rotateY = ((x - centerX) / centerX) * 10;  // 左右最大倾斜 10 度
 
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
   };
