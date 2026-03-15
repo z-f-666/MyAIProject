@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
-import { ExternalLink, Clock, User } from 'lucide-react'
+// 👉 把 ExternalLink 换成了 ArrowRight，因为现在是内部跳转啦
+import { ArrowRight, Clock, User } from 'lucide-react' 
 import { NewsArticle } from '@/types/news'
 
 interface NewsCardProps {
@@ -47,7 +48,8 @@ export default function NewsCard({ article }: NewsCardProps) {
         </div>
         
         <h3 className="font-bold text-lg mb-2 line-clamp-2 hover:text-theme-primary transition-colors">
-          <Link href={article.url} target="_blank" rel="noopener noreferrer">
+          {/* 👉 标题的链接也改成了内部动态路由，并且去掉了 target="_blank" */}
+          <Link href={`/news/${article.id}`}>
             {article.title}
           </Link>
         </h3>
@@ -64,14 +66,13 @@ export default function NewsCard({ article }: NewsCardProps) {
             </div>
           )}
           
+          {/* 👉 按钮的链接改成了内部动态路由，并使用了 ArrowRight 图标 */}
           <Link
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/news/${article.id}`}
             className="flex items-center gap-1 text-sm text-theme-primary hover:opacity-70 transition-opacity"
           >
             阅读更多
-            <ExternalLink className="h-3 w-3" />
+            <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </div>
