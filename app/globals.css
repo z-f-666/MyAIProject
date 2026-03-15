@@ -92,3 +92,36 @@ html.dark input {
 .category-badge:hover {
   opacity: 0.8;
 }
+
+/* 1. 强制收编顶端 (header) 和底部 (footer) 的背景与边框 */
+html.dark header,
+html.dark footer {
+  background-color: #1f2937 !important; /* 和卡片一样的深灰色 */
+  border-color: #374151 !important;
+}
+
+/* 修复 Header 和 Footer 里的灰色小字 */
+html.dark header p, html.dark header span,
+html.dark footer p, html.dark footer span {
+  color: #9ca3af !important; 
+}
+
+/* 2. 收编分类标签 (通常是 bg-gray-100 或 bg-gray-200) */
+html.dark .bg-gray-100,
+html.dark .bg-gray-200 {
+  background-color: #374151 !important; /* 未选中的标签变成深空灰 */
+  color: #e5e7eb !important; /* 文字变成亮白色 */
+  border-color: #4b5563 !important;
+}
+
+/* 分类标签鼠标放上去 (hover) 的时候，稍微再亮一点点 */
+html.dark .hover\:bg-gray-200:hover,
+html.dark .hover\:bg-gray-300:hover {
+  background-color: #4b5563 !important;
+}
+
+/* 3. 修复有些可能写死的灰色边框线 */
+html.dark .border-gray-200,
+html.dark .border-gray-100 {
+  border-color: #374151 !important;
+}
