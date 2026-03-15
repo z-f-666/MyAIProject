@@ -48,6 +48,47 @@ body {
   transition: background-color 0.2s ease-in-out;
 }
 
+html.dark {
+  background-color: #111827 !important; /* 全局深灰黑背景 */
+  color: #f3f4f6 !important; /* 全局亮色文字 */
+}
+
+/* 强制让背景变量失效，使用深色 */
+html.dark body {
+  background-color: transparent !important;
+}
+
+/* 把所有白色的卡片、背景全都变成高级的稍微浅一点的深灰 */
+html.dark .bg-white {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+/* 把所有原本的深色文字（标题）翻转成白色 */
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark h1, html.dark h2, html.dark h3 {
+  color: #f9fafb !important;
+}
+
+/* 把所有中灰色的副标题文字变成浅灰色 */
+html.dark .text-gray-700,
+html.dark .text-gray-600,
+html.dark .text-gray-500 {
+  color: #9ca3af !important;
+}
+
+/* 搜索框和部分浅灰色区域的适配 */
+html.dark .bg-gray-50 {
+  background-color: #374151 !important;
+}
+
+html.dark input {
+  background-color: #1f2937 !important;
+  color: #f3f4f6 !important;
+  border-color: #4b5563 !important;
+}
+
 .category-badge:hover {
   opacity: 0.8;
 }
