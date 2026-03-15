@@ -22,14 +22,13 @@ export default function CategoryFilter() {
         <button
           key={cat.id}
           onClick={() => setCategory(cat.id)}
-          className={`category-badge px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
             category === cat.id
-              // 选中时：背景变为动态主题色，文字强制变白确保能看清
+              // 👉 选中时：动态主题色背景，文字纯白
               ? 'bg-theme-primary text-white shadow-md'
-              // 未选中时：背景变为当前颜色的 10% 透明度，文字 80% 透明度
-              : 'opacity-80 hover:opacity-100'
+              // 👉 未选中时：白天是浅灰背景配深灰字，黑夜是深灰背景配浅白字！
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
           }`}
-          style={category !== cat.id ? { backgroundColor: 'color-mix(in srgb, currentColor 10%, transparent)' } : {}}
           title={cat.description}
         >
           {cat.name}
