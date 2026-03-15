@@ -125,3 +125,24 @@ html.dark .border-gray-200,
 html.dark .border-gray-100 {
   border-color: #374151 !important;
 }
+
+/* 1. 强行收编 Header 和 Footer 里的链接 (<a>) 和图标 (<svg>) */
+html.dark header a,
+html.dark footer a,
+html.dark header svg,
+html.dark footer svg {
+  color: #e5e7eb !important; /* 变成亮灰色，确保能看清 */
+}
+
+/* 鼠标放上去时，让它们亮起纯白色的光 */
+html.dark header a:hover,
+html.dark footer a:hover {
+  color: #ffffff !important; 
+}
+
+/* 2. 强行收编那些带透明度的副标题段落 (比如首页的“获取最新的新闻资讯...”) */
+html.dark .opacity-80,
+html.dark .opacity-70,
+html.dark .opacity-50 {
+  color: #9ca3af !important; /* 变成柔和的浅灰色 */
+}
