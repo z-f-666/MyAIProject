@@ -39,20 +39,25 @@ export function NewsProvider({ children }: { children: ReactNode }) {
     try {
       const response = await getNews(newsCategory, newsCountry, pageNum)
       if (response && response.articles) {
+        
+        // 👉 终极滤网 1：先对刚拿到的这批数据进行“内部按标题去重”（消灭同一批里的双胞胎）
+        const incomingUnique = response.articles.filter((article: NewsArticle, index: number, self: NewsArticle[]) =>
+          index === self.findIndex((a) => a.title === article.title)
+        );
+
         if (pageNum === 1) {
-          setArticles(response.articles)
+          setArticles(incomingUnique)
         } else {
-          // 👉 增加去重逻辑：过滤掉 URL 已经存在的新闻
+          // 👉 终极滤网 2：翻页时，按标题和已有的新闻做对比，绝不放过任何重复（将 url 去重升级为 title 去重）
           setArticles(prev => {
-            const existingUrls = new Set(prev.map(article => article.url));
-            const uniqueNewArticles = response.articles.filter(
-              (article: NewsArticle) => !existingUrls.has(article.url)
+            const existingTitles = new Set(prev.map(article => article.title));
+            const uniqueNewArticles = incomingUnique.filter(
+              (article: NewsArticle) => !existingTitles.has(article.title)
             );
             return [...prev, ...uniqueNewArticles];
           });
         }
         setPage(pageNum)
-        // GNews 免费版一次给 10 条，如果拿到了 10 条说明可能还有
         setHasMore(response.articles.length >= 10) 
       } else {
         if (pageNum === 1) setArticles([])
@@ -78,14 +83,19 @@ export function NewsProvider({ children }: { children: ReactNode }) {
     try {
       const response = await searchNews(query, pageNum)
       if (response && response.articles) {
+         
+         // 👉 搜索结果同样加上终极标题滤网
+         const incomingUnique = response.articles.filter((article: NewsArticle, index: number, self: NewsArticle[]) =>
+           index === self.findIndex((a) => a.title === article.title)
+         );
+
          if (pageNum === 1) {
-           setArticles(response.articles)
+           setArticles(incomingUnique)
          } else {
-           // 👉 增加去重逻辑：过滤掉 URL 已经存在的新闻
            setArticles(prev => {
-             const existingUrls = new Set(prev.map(article => article.url));
-             const uniqueNewArticles = response.articles.filter(
-               (article: NewsArticle) => !existingUrls.has(article.url)
+             const existingTitles = new Set(prev.map(article => article.title));
+             const uniqueNewArticles = incomingUnique.filter(
+               (article: NewsArticle) => !existingTitles.has(article.title)
              );
              return [...prev, ...uniqueNewArticles];
            });
