@@ -3,13 +3,15 @@ import { Newspaper, Github, Twitter } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-current border-opacity-10 mt-12 opacity-90">
+    // 👉 关键修复：加了 dark:text-gray-300 让整体文字在黑夜中变浅色
+    <footer className="border-t border-current border-opacity-10 mt-12 opacity-90 dark:text-gray-300 transition-colors duration-300">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Newspaper className="h-6 w-6 text-theme-primary" />
-              <span className="text-lg font-bold">今日新闻</span>
+              {/* 👉 标题专门加白 */}
+              <span className="text-lg font-bold dark:text-white">今日新闻</span>
             </div>
             <p className="opacity-70 text-sm">
               为您提供最新、最全面的新闻资讯，让您随时了解世界各地正在发生的事情。
@@ -17,7 +19,8 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">快速链接</h3>
+            {/* 👉 标题专门加白 */}
+            <h3 className="font-semibold mb-4 dark:text-white">快速链接</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="opacity-70 hover:opacity-100 hover:text-theme-primary text-sm transition-colors">
@@ -38,7 +41,8 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">关注我们</h3>
+            {/* 👉 标题专门加白 */}
+            <h3 className="font-semibold mb-4 dark:text-white">关注我们</h3>
             <div className="flex space-x-4">
               <a href="#" className="opacity-70 hover:opacity-100 hover:text-theme-primary transition-colors">
                 <Twitter className="h-5 w-5" />
