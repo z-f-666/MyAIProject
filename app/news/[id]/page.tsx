@@ -3,7 +3,6 @@
 import { useNews } from '@/context/NewsContext'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { NewsArticle } from '@/types/news'
 
 export default function NewsDetail() {
