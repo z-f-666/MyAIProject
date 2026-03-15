@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { NewsProvider } from '@/context/NewsContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={inter.className}>
+        <NewsProvider>
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">
@@ -25,6 +27,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        </NewsProvider>
       </body>
     </html>
   )
