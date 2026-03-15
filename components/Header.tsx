@@ -8,7 +8,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="border-b border-current border-opacity-10">
+    // 👉 关键修复：加了 dark:text-white
+    <header className="border-b border-current border-opacity-10 dark:text-white transition-colors duration-300">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
