@@ -4,6 +4,7 @@ export interface NewsSource {
 }
 
 export interface NewsArticle {
+  id: string;
   source: NewsSource;
   author: string;
   title: string;
