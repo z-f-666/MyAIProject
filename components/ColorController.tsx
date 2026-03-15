@@ -3,20 +3,43 @@
 import { useState, useEffect } from 'react'
 
 export default function ColorController() {
-  // 1. 准备两个“记忆盒子”，记住你选的颜色 (默认给个白色和蓝色)
   const [bgColor, setBgColor] = useState('#ffffff');
   const [primaryColor, setPrimaryColor] = useState('#3b82f6');
+  
+  // 加一个“是否已经读过日记”的标记，防止一加载就把白颜色存进去覆盖了之前的记录
+  const [isLoaded, setIsLoaded] = useState(false); 
 
-  // 2. 网页加载完后，实时监听背景颜色的变化，并强行改写网页的 CSS
+  // 1. 网页刚一加载，赶紧去日记本（localStorage）里找上次存的颜色！
   useEffect(() => {
-    // 这句话的意思是：找到网页的最根部 (html 标签)，把它的背景色强行改成你选的颜色！
+    const savedBg = localStorage.getItem('my-theme-bg');
+    const savedPrimary = localStorage.getItem('my-theme-primary');
+    
+    // 如果日记本里有记录，就提取出来并应用
+    if (savedBg) {
+      setBgColor(savedBg);
+      document.documentElement.style.setProperty('--dynamic-bg', savedBg);
+    }
+    if (savedPrimary) {
+      setPrimaryColor(savedPrimary);
+      document.documentElement.style.setProperty('--dynamic-primary', savedPrimary);
+    }
+    
+    setIsLoaded(true); // 标记：日记本已经读完啦！
+  }, []);
+
+  // 2. 监听背景色：如果你选了新颜色，立马应用并写进日记本
+  useEffect(() => {
+    if (!isLoaded) return; // 如果还没读完日记，先别执行，防止误覆盖
     document.documentElement.style.setProperty('--dynamic-bg', bgColor);
-  }, [bgColor]);
+    localStorage.setItem('my-theme-bg', bgColor);
+  }, [bgColor, isLoaded]);
 
-  // 实时监听主题色的变化
+  // 3. 监听主题色：如果你选了新颜色，立马应用并写进日记本
   useEffect(() => {
+    if (!isLoaded) return; 
     document.documentElement.style.setProperty('--dynamic-primary', primaryColor);
-  }, [primaryColor]);
+    localStorage.setItem('my-theme-primary', primaryColor);
+  }, [primaryColor, isLoaded]);
 
   return (
     <div className="p-4 m-4 border-2 border-dashed border-gray-300 rounded-xl bg-white shadow-lg inline-block">
@@ -30,9 +53,9 @@ export default function ColorController() {
             type="color" 
             value={bgColor} 
             onChange={(e) => setBgColor(e.target.value)} 
-            className="w-10 h-10 cursor-pointer border-0 p-0"
+            className="w-10 h-10 cursor-pointer border-0 p-0 rounded-md"
           />
-          <span className="text-sm text-gray-500">{bgColor}</span>
+          <span className="text-sm text-gray-500 uppercase">{bgColor}</span>
         </label>
 
         {/* 主题色吸管 */}
@@ -42,9 +65,9 @@ export default function ColorController() {
             type="color" 
             value={primaryColor} 
             onChange={(e) => setPrimaryColor(e.target.value)} 
-            className="w-10 h-10 cursor-pointer border-0 p-0"
+            className="w-10 h-10 cursor-pointer border-0 p-0 rounded-md"
           />
-          <span className="text-sm text-gray-500">{primaryColor}</span>
+          <span className="text-sm text-gray-500 uppercase">{primaryColor}</span>
         </label>
       </div>
     </div>
