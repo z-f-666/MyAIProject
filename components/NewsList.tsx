@@ -54,7 +54,7 @@ export default function NewsList() {
             </button>
           ) : (
             <p className="text-gray-400 dark:text-gray-500 text-sm flex items-center gap-2">
-              <span>—</span> 主人，到底啦，没有更多新闻了 <span>—</span>
+              <span>—</span> 到底啦，没有更多新闻了 <span>—</span>
             </p>
           )}
         </div>
