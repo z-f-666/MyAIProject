@@ -1,4 +1,3 @@
-import { NewsProvider } from '@/context/NewsContext'
 import NewsList from '@/components/NewsList'
 import CategoryFilter from '@/components/CategoryFilter'
 import SearchBar from '@/components/SearchBar'
@@ -7,7 +6,6 @@ import ColorController from '@/components/ColorController' // 👉 引入调色�
 
 export default function Home() {
   return (
-    <NewsProvider>
       <div className="container mx-auto px-4 py-6">
         
         {/* 👉 顶部标题区与调色盘布局 */}
@@ -45,6 +43,5 @@ export default function Home() {
         
         <NewsList />
       </div>
-    </NewsProvider>
   )
 }
