@@ -86,7 +86,7 @@ export default function BookmarksPage() {
       {savedArticles.length === 0 ? (
         // 增加了暗黑模式的背景和边框适配
         <div className="text-center py-20 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700 mt-10 transition-colors duration-300">
-          <p className="text-gray-500 dark:text-gray-400 text-lg mb-6">宝宝，你的收藏夹还是空空如也哦，快去点亮一些小星星吧~</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg mb-6">你的收藏夹还是空空如也哦，快去点亮一些小星星吧~</p>
           <Link 
             href="/" 
             className="px-8 py-3 bg-theme-primary text-white font-medium rounded-full hover:opacity-80 transition-opacity shadow-md"
