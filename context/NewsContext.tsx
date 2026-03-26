@@ -58,7 +58,7 @@ export function NewsProvider({ children }: { children: ReactNode }) {
           });
         }
         setPage(pageNum)
-        setHasMore(response.articles.length >= 12) 
+        setHasMore(response.articles.length >= 10) 
       } else {
         if (pageNum === 1) setArticles([])
         setHasMore(false)
@@ -101,7 +101,7 @@ export function NewsProvider({ children }: { children: ReactNode }) {
            });
          }
          setPage(pageNum)
-         setHasMore(response.articles.length >= 12)
+         setHasMore(response.articles.length >= 10)
       } else {
          if (pageNum === 1) setArticles([])
          setHasMore(false)
