@@ -33,7 +33,7 @@ export async function getNews(category = 'general', country = 'us', page = 1) {
   if (USE_REAL_API && API_KEY) {
     try {
       // 🌍 已经去掉了 &lang=en，这样就能原汁原味获取各个国家本土语言的新闻啦！
-      const url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=12&page=${page}&apikey=${API_KEY}`;
+      const url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=10&page=${page}&apikey=${API_KEY}`;
       
       const response = await fetch(url, { next: { revalidate: 3600 } });
       const data = await response.json();
@@ -62,7 +62,7 @@ export async function searchNews(query: string, page = 1) {
   if (USE_REAL_API && API_KEY) {
     try {
       // 🌍 同样去掉了 &lang=en
-      const url = `https://gnews.io/api/v4/search?q=${query}&max=12&page=${page}&apikey=${API_KEY}`;
+      const url = `https://gnews.io/api/v4/search?q=${query}&max=10&page=${page}&apikey=${API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
 
